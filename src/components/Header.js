@@ -4,26 +4,23 @@ import { Navbar, Nav } from 'react-bootstrap';
 import { animateScroll } from 'react-scroll';
 import '../styles/header.css';
 
-
-
-
 const Header = ({ upOffset = 0, downOffset = 50 }) => {
   const [visible, setVisible] = useState(true);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
 
-  const handleScroll = () => {
-    const currentScrollPos = window.pageYOffset;
-    setVisible(prevScrollPos > currentScrollPos || currentScrollPos < upOffset);
-    setPrevScrollPos(currentScrollPos);
-  };
-
   useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollPos = window.pageYOffset;
+      setVisible(prevScrollPos > currentScrollPos || currentScrollPos < upOffset);
+      setPrevScrollPos(currentScrollPos);
+    };
+
     window.addEventListener('scroll', handleScroll);
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [prevScrollPos, visible, handleScroll]);
+  }, [prevScrollPos, upOffset]);
 
   const scrollToTop = () => {
     animateScroll.scrollToTop();
@@ -31,9 +28,9 @@ const Header = ({ upOffset = 0, downOffset = 50 }) => {
   
   return (
     <Navbar
-    bg="dark"
-    variant="dark"
-    expand="lg"
+      bg="dark"
+      variant="dark"
+      expand="lg"
       className={`scroll-navbar ${visible ? 'scroll-navbar--visible' : 'scroll-navbar--hidden'}`}
     >
       <Link to="/" onClick={scrollToTop}>

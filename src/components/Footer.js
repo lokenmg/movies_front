@@ -15,7 +15,7 @@ function Footer() {
           <Col md={6}>
             <h5>Enlaces útiles</h5>
             <ul className="list-unstyled">
-              <li><a href="#">Inicio</a></li>
+              <li><a href="/">Inicio</a></li>
               <li><a href="https://www.facebook.com/rodrigo.mencias.73/">Facebook</a></li>
               <li><a href="https://github.com/lokenmg">Github</a></li>
             </ul>

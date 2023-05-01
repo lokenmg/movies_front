@@ -1,25 +1,53 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { Navbar, Nav } from 'react-bootstrap';
+import { animateScroll } from 'react-scroll';
+import '../styles/header.css';
 
-const Header = () => {
+const Header = ({ upOffset = 0, downOffset = 50 }) => {
+  const [visible, setVisible] = useState(true);
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollPos = window.pageYOffset;
+      setVisible(prevScrollPos > currentScrollPos || currentScrollPos < upOffset);
+      setPrevScrollPos(currentScrollPos);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [prevScrollPos, upOffset]);
+
+  const scrollToTop = () => {
+    animateScroll.scrollToTop();
+  };
+  
   return (
-    <div className="flex pa1 justify-between nowrap orange">
-      <div className="flex flex-fixed black">
-        <Link to="/" className="no-underline black">
-          <div className="fw7 mr1">Hacker News</div>
-        </Link>        
-        <Link to="/" className="ml1 no-underline black">
-          List links
-        </Link>
-        <div className="ml1">|</div>
-        <Link
-          to="/create"
-          className="ml1 no-underline black"
-        >
-          new
-        </Link>
-      </div>
-    </div>
+    <Navbar
+      bg="dark"
+      variant="dark"
+      expand="lg"
+      className={`scroll-navbar ${visible ? 'scroll-navbar--visible' : 'scroll-navbar--hidden'}`}
+    >
+      <Link to="/" onClick={scrollToTop}>
+        <Navbar.Brand>PeliculasList</Navbar.Brand>
+      </Link>
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav">
+        <Nav className="mr-auto">
+          <Link to="/" onClick={scrollToTop} className="nav-link">
+            Inicio
+          </Link>
+          <Link to="/create" className="nav-link">
+            Crear
+          </Link>
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
   );
 };
 

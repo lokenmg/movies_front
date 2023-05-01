@@ -3,11 +3,13 @@ import LinkList from './LinkList';
 import CreateLink from './createLink';
 import Header from './Header';
 import { Route, Routes } from 'react-router-dom';
+import Footer from './Footer';
+
 
 
 function App() {
   return (
-<div className="center w85">
+<div >
       <Header />
       <div className="ph3 pv1 background-gray">
         <Routes>
@@ -17,7 +19,10 @@ function App() {
             element={<CreateLink/>}
           />
         </Routes>
+
       </div>
+
+      <Footer />
     </div>
   );
 }

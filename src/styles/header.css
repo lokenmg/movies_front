@@ -1,0 +1,60 @@
+.container {
+    padding: 50px;
+    background-color: #141414;
+    color: #fff;
+  }
+  
+  .card {
+    background-color: #222222;
+    border: none;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card-title {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    color: #ff4400;
+    text-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  .list-group-item {
+    font-size: 1.2rem;
+    background-color: #222222;
+    border: none;
+  }
+  
+  .list-group-item:first-of-type {
+    border-top: none;
+  }
+  
+  .list-group-item:last-of-type {
+    border-bottom: none;
+  }
+  
+  .list-group-item strong {
+    color: #0dff00;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+  }
+  
+  .scroll-navbar {
+    position: fixed;
+    width: 100%;
+    z-index: 9999;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .scroll-navbar--hidden {
+    transform: translateY(-100%);
+  }
+  
+  .scroll-navbar--visible {
+    transform: translateY(0%);
+  }
+
+  .form{
+    background-color: #141414;
+  }

@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link , useNavigate } from 'react-router-dom';
 import { Navbar, Nav } from 'react-bootstrap';
+import { AUTH_TOKEN } from '../constants';
 import { animateScroll } from 'react-scroll';
 import '../styles/header.css';
 
 const Header = ({ upOffset = 0, downOffset = 50 }) => {
+  const navigate = useNavigate();
+  const authToken = localStorage.getItem(AUTH_TOKEN);
   const [visible, setVisible] = useState(true);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
 
@@ -45,6 +48,25 @@ const Header = ({ upOffset = 0, downOffset = 50 }) => {
           <Link to="/create" className="nav-link">
             Crear
           </Link>
+          <div className="flex flex-fixed">
+        {authToken ? (
+          <div
+            className="nav-link"
+            onClick={() => {
+              localStorage.removeItem(AUTH_TOKEN);
+              navigate(`/`);
+            }}
+          >
+            logout
+          </div>
+        ) : (
+          <Link
+            to="/login"
+            className="nav-link">
+            Login
+          </Link>
+        )}
+      </div>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

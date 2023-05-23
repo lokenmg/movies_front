@@ -5,6 +5,8 @@ import Header from './Header';
 import { Route, Routes } from 'react-router-dom';
 import Footer from './Footer';
 import Login from './Login';
+import Textdavinci003 from './text-davinci-003';
+import Imgdavinci003 from './img-davinci-003';
 
 
 
@@ -20,6 +22,8 @@ function App() {
             element={<CreateLink/>}
           />
           <Route path="/login" element={<Login/>} />
+          <Route path='/davinchi' element={<Textdavinci003/>}/>
+          <Route path='/crearImg' element={<Imgdavinci003/>}/>
         </Routes>
 
       </div>

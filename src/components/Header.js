@@ -48,6 +48,17 @@ const Header = ({ upOffset = 0, downOffset = 50 }) => {
           <Link to="/create" className="nav-link">
             Crear
           </Link>
+          <Link
+            to="/crearImg"
+            className='nav-link'>
+              crearIMG
+          </Link>
+          <Link
+            to="/davinchi"
+            className='nav-link'>
+              Davinci
+          </Link>
+
           <div className="flex flex-fixed">
         {authToken ? (
           <div

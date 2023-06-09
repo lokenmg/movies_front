@@ -1,30 +1,27 @@
 import { useState } from "react";
-import ServiceImg from "../services/service.img";
+import serviceEdits from "../../services/service.edits";
+import { useTranslation } from "react-i18next";
 
-export default function Imgdavinci003() {
+export default function Editdavinci003() {
+
   const [animalInput, setAnimalInput] = useState("");
   const [result, setResult] = useState();
-
+  const { t } = useTranslation();
+  
   async function onSubmit(event) {
     event.preventDefault();
     try {
-      const response = await ServiceImg.getDaVinci({ animal: animalInput });
-      /*const response = await fetch("/text-davinci-003/generate", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ animal: animalInput }),
-      });*/
-
+      const response = await serviceEdits.getDaVinci({ animal: animalInput });
       const data = await response;
       console.log(response);
+
       if (response.status !== 200) {
         throw data.error || new Error(`Request failed with status ${response.status}`);
       }
       console.log("response", response);
       setResult(data.result);
       setAnimalInput("");
+
     } catch(error) {
       // Consider implementing your own error handling logic here
       console.error(error);
@@ -38,19 +35,20 @@ export default function Imgdavinci003() {
         <link rel="icon" href="/dog.png" />
 
       <main>
-        <img src="" />
-        <h3>Name my pet</h3>
+        <h3>{t("correct_texts")}</h3>
         <form onSubmit={onSubmit}>
           <input
             type="text"
             name="animal"
-            placeholder="Enter an animal"
+            placeholder={t("enter_the_text")}
             value={animalInput}
             onChange={(e) => setAnimalInput(e.target.value)}
           />
-          <input type="submit" value="Generate names" />
+          <input type="submit" value={t("correct_texts")} />
         </form>
-        <div><img src={result} ></img> </div>
+
+        <h1>{t("corrected_texts")}</h1>
+        <div>{result}</div>
       </main>
     </div>
   );

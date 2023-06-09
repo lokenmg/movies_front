@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useMutation, gql } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 
 
 const CREATE_LINK_MUTATION = gql`
@@ -39,7 +40,7 @@ mutation createPeliculas(
 `;
 
 const CreateLink = () => {
-
+    const { t } = useTranslation();
     const navigate = useNavigate();
 
     const [formState, setFormState] = useState({
@@ -75,23 +76,21 @@ const CreateLink = () => {
                 createLink();
             }}>
 
-                <h2>Agregar informacion de películas </h2>
+                <h2>{t("add_movie_info")} </h2>
                 
                 <Form.Group controlId="formNombre">
-                    <Form.Label>Nombre de la película</Form.Label>
+                    <Form.Label>{t('movie_name')} </Form.Label>
                     <Form.Control
                         type="text"
-                        placeholder="Ingrese el nombre de la película"
                         value={formState.nombre}
                         onChange={(e) => setFormState({ ...formState, nombre: e.target.value })}
                     />
                 </Form.Group>
 
                 <Form.Group controlId="formEstudio">
-                    <Form.Label>Nombre del estudio</Form.Label>
+                    <Form.Label>{t("study_name")}</Form.Label>
                     <Form.Control
                         type="text"
-                        placeholder="Ingrese el nombre del estudio"
                         value={formState.estudio}
                         onChange={(e) => setFormState({ ...formState, estudio: e.target.value })}
                     />
@@ -99,66 +98,60 @@ const CreateLink = () => {
 
 
                 <Form.Group controlId="formGenero">
-                    <Form.Label>Género de la película</Form.Label>
+                    <Form.Label>{t("movie_genre")}</Form.Label>
                     <Form.Control
                         type="text"
-                        placeholder="Ingrese el género de la película"
                         value={formState.genero}
                         onChange={(e) => setFormState({ ...formState, genero: e.target.value })}
                     />
                 </Form.Group>
 
                 <Form.Group controlId="formDuracion">
-                    <Form.Label>Duración de la película (minutos)</Form.Label>
+                    <Form.Label>{t("movie_duration")}</Form.Label>
                     <Form.Control
                         type="number"
-                        placeholder="Ingrese la duración de la película en minutos"
                         value={formState.duracion}
                         onChange={(e) => setFormState({ ...formState, duracion: e.target.value })}
                     />
                 </Form.Group>
 
                 <Form.Group controlId="formRecaudacion">
-                    <Form.Label>Recaudación de la película</Form.Label>
+                    <Form.Label>{t("movie_gross")}</Form.Label>
                     <Form.Control
                         type="number"
-                        placeholder="Ingrese la recaudación de la película"
                         value={formState.recaudacion}
                         onChange={(e) => setFormState({ ...formState, recaudacion: e.target.value })}
                     />
                 </Form.Group>
 
                 <Form.Group controlId="formProductor">
-                    <Form.Label>Productor de la película</Form.Label>
+                    <Form.Label>{t("movie_producer")}</Form.Label>
                     <Form.Control
                         type="text"
-                        placeholder="Ingrese el nombre del productor de la película"
                         value={formState.productor}
                         onChange={(e) => setFormState({ ...formState, productor: e.target.value })}
                     />
                 </Form.Group>
 
                 <Form.Group controlId="formProductor">
-                    <Form.Label>Valoración de la película</Form.Label>
+                    <Form.Label>{t("movie_rating")}</Form.Label>
                     <Form.Control
                         type="text"
-                        placeholder="Ingrese el nombre del productor de la película"
                         value={formState.valoracion}
                         onChange={(e) => setFormState({ ...formState, valoracion: e.target.value })}
                     />
                 </Form.Group>
 
                 <Form.Group controlId="formProductor">
-                    <Form.Label>Servicios de streaming</Form.Label>
+                    <Form.Label>{t("streaming_plataform")}</Form.Label>
                     <Form.Control
                         type="text"
-                        placeholder="Ingrese el nombre del productor de la película"
                         value={formState.servicio}
                         onChange={(e) => setFormState({ ...formState, servicio: e.target.value })}
                     />
                 </Form.Group>
 
-                <Button type="submit" variant="outline-dark">Agregar</Button>
+                <Button type="submit" variant="outline-dark">{t("add_movie")}</Button>
             </Form>
         </div>
     );

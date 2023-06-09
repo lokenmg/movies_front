@@ -1,22 +1,28 @@
 import { useState } from "react";
-import serviceDavinci003 from "../services/service.davinci-003";
+import { useTranslation } from "react-i18next";
+import ServiceEmoji from "../../services/service.emoji";
+import { useQuery, gql } from '@apollo/client';
+import SavePrompt from "../savepromp";
 
-export default function Textdavinci003() {
+const FEED_QUERY = gql`
+  query {
+    me {
+      username
+    }
+  }
+`;
+
+export default function EmojiFront() {
+  const { data: { me } = {} } = useQuery(FEED_QUERY);
   const [animalInput, setAnimalInput] = useState("");
   const [result, setResult] = useState();
-
+  const { t } = useTranslation();
+  const user = me?.username;
+  
   async function onSubmit(event) {
     event.preventDefault();
     try {
-      const response = await serviceDavinci003.getDaVinci({ animal: animalInput });
-      /*const response = await fetch("/text-davinci-003/generate", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ animal: animalInput }),
-      });*/
-
+      const response = await ServiceEmoji.getDaVinci({ animal: animalInput });
       const data = await response;
       console.log(response);
       if (response.status !== 200) {
@@ -24,7 +30,6 @@ export default function Textdavinci003() {
       }
       console.log("response", response);
       setResult(data.result);
-      setAnimalInput("");
     } catch(error) {
       // Consider implementing your own error handling logic here
       console.error(error);
@@ -38,19 +43,28 @@ export default function Textdavinci003() {
         <link rel="icon" href="/dog.png" />
 
       <main>
-        <img src="" />
-        <h3>Name my pet</h3>
+        <h3>{t("create_emojis")}</h3>
         <form onSubmit={onSubmit}>
           <input
             type="text"
             name="animal"
-            placeholder="Enter an animal"
+            placeholder={t("movie_name_actors")}
             value={animalInput}
             onChange={(e) => setAnimalInput(e.target.value)}
           />
-          <input type="submit" value="Generate names" />
+          <input type="submit" value={t("generate_names")} />
         </form>
+
+        <h1>{t("actors_of_movie")}</h1>
         <div>{result}</div>
+        {user && (
+          <SavePrompt
+            user={user}
+            model="emoji"
+            prompt={animalInput}
+            result={result}
+          />
+        )}
       </main>
     </div>
   );

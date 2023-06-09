@@ -7,7 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { setContext } from '@apollo/client/link/context';
 import { AUTH_TOKEN } from './constants';
-
+import './i18nextConf'
 // 1
 import {
   ApolloProvider,
